@@ -1,0 +1,12 @@
+# Environnement virtuel
+env/
+venv/
+mon_env/
+
+# Cache Python
+__pycache__/
+*.pyc
+
+# Fichiers temporaires
+*.csv
+
