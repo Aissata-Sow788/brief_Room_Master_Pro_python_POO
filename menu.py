@@ -29,9 +29,7 @@ class Menu:
             print("7: Lister groupes")
             print("8: Lister reservations")
             print("9: Export planning complet CSV")
-            # print("10: Plusieurs creneaux pour un seul groupe")
-            # print("11: Lister creneau reservtion")
-            # print("12: Les reservations d'un groupe")
+            print("10: Annuler reservation")
             print("0: Deconnexion")
 
             choix = input("Entrez votre choix :")
@@ -126,6 +124,18 @@ class Menu:
                 case "9":
                     self.export.export_planning()
                     self.export.lister_planing()
+                case "10":
+                        print('------------------Liste des reservations-------------------')
+                        self.reservation.lister_reservation()
+                        try:
+                            id_reservation=input("id_reservation: ").strip()
+
+                            if not id_reservation.replace(" ", "").isnumeric():
+
+                                raise ValueError("Vous devez saisir un numero")
+                            self.planning.annuler_reservation(id_reservation)
+                        except Exception as e:
+                            print("Erreur :", e)
                 case "0":
                     print("Au revoir 👋")
                     break
