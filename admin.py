@@ -48,21 +48,23 @@ class PlanningJournaliere:
             cursor.close()
 
     def annuler_reservation(self, id_reservation):
-        curor = self.db.connection.cursor()
+        try:
+            cursor = self.db.connection.cursor()
 
-        query = "select * from reservations where id = %s"
-        curor.execute(query, (id_reservation,))
-        result = curor.fetchone()
+            query = "DELETE FROM reservations WHERE id = %s"
+            cursor.execute(query, (id_reservation,))
+            self.db.connection.commit()
 
-        if not result:
-            print("cette reservation n'existe pas")
-            return
+            if cursor.rowcount == 0:
+                print("Cette réservation n'existe pas")
+            else:
+                print("Réservation annulée avec succès")
 
-        query = "delete from reservations where id = %s"
+        except Exception as e:
+            print("Erreur :", e)
 
-        curor.execute(query, (id_reservation,))
-        self.db.connection.commit()
-        print("Reservation annuler avec succes")
+        finally:
+            cursor.close()
 
 
 

@@ -29,7 +29,7 @@ class Authentification:
                             raise ValueError("email doit etre une chaine caractere")
                         
                         mdp = input("mdp:").strip().lower()
-                        if not mdp.replace(" ","").replace("'","").isalnum():
+                        if not mdp.replace(" ","").replace("'","").isalpha():
                             raise ValueError("mdp doit etre une chaine caractere")
                         
                         self.connect.inscription(prenom, nom, email, mdp)

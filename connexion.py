@@ -9,11 +9,11 @@ class Connexion:
        
 
     def inscription(self, prenom, nom, email, mdp):
+        cursor = None
         try:
-      
             cursor = self.db.connection.cursor(dictionary=True)
 
-            mdp_byte = mdp["mdp"].encode("utf-8")
+            mdp_byte = mdp.encode("utf-8")
             hashed = bcrypt.hashpw(mdp_byte, bcrypt.gensalt())
             query = "insert into utilisateurs (prenom, nom, email, mdp, role) values (%s,%s,%s,%s,%s)"
             cursor.execute(query, (prenom, nom, email, hashed, 'Admin'))
@@ -22,10 +22,13 @@ class Connexion:
 
         except Exception as e:
             print("Erreur :", e)
-         
-            cursor.close()
+
+        finally:
+            if cursor:
+                cursor.close()
 
     def se_connecter(self, email, mdp):
+        cursor = None
         try:
             cursor = self.db.connection.cursor(dictionary=True)
 
@@ -44,8 +47,10 @@ class Connexion:
             else:
                 print("mot de passe incorrect")
                 return False
-                
+
         except Exception as e:
             print("Erreur :", e)
 
-            cursor.close()
+        finally:
+            if cursor:
+                cursor.close()

@@ -83,6 +83,7 @@ class Menu:
                         if not id_creneau.replace(" ", "").isnumeric():
 
                             raise ValueError("Vous devez saisir un numero")
+                        id_creneau = int(id_creneau)
                         print('------------------Liste des GROUPEs-------------------')
                         self.groupe.lister_groupe()
                         id_groupe=input("id_groupe: ").strip()
@@ -90,6 +91,7 @@ class Menu:
                         if not id_groupe.replace(" ", "").isnumeric():
 
                             raise ValueError("Vous devez saisir un numero")
+                        id_groupe = int(id_groupe)
                         self.reservation.reservation(date_reservation, motif, id_creneau, id_groupe)
                     except Exception as e:
                         print("Erreur :", e)
@@ -133,6 +135,7 @@ class Menu:
                             if not id_reservation.replace(" ", "").isnumeric():
 
                                 raise ValueError("Vous devez saisir un numero")
+                            id_reservation = int(id_reservation)
                             self.planning.annuler_reservation(id_reservation)
                         except Exception as e:
                             print("Erreur :", e)
